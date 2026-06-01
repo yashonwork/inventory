@@ -96,8 +96,9 @@ body {
   text-decoration: none;
   font-style: italic;
 }
-.navbar nav { display: flex; gap: 2px; }
-.navbar nav a {
+.navbar-right { display: flex; align-items: center; gap: 0; min-width: 0; }
+.navbar-links { display: flex; gap: 2px; }
+.navbar-links a {
   color: var(--text-tertiary);
   text-decoration: none;
   font-size: 0.8rem;
@@ -105,10 +106,11 @@ body {
   padding: 6px 16px;
   border-radius: 50px;
   transition: all 0.2s;
+  white-space: nowrap;
 }
-.navbar nav a:hover { color: var(--text-primary); background: rgba(0,0,0,0.03); }
-[data-theme="dark"] .navbar nav a:hover { background: rgba(255,255,255,0.06); }
-.navbar nav a.active {
+.navbar-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.03); }
+[data-theme="dark"] .navbar-links a:hover { background: rgba(255,255,255,0.06); }
+.navbar-links a.active {
   color: #fff;
   background: var(--accent);
 }
@@ -128,6 +130,7 @@ body {
   transition: all 0.2s;
   padding: 0;
   margin-left: 4px;
+  flex-shrink: 0;
 }
 .theme-toggle svg { width: 15px; height: 15px; display: block; }
 .theme-toggle:hover { background: rgba(0,0,0,0.04); color: var(--text-primary); }
@@ -458,4 +461,26 @@ hr { border: none; border-top: 1px solid var(--border-light); margin: 18px 0; }
   font-weight: 600;
   color: var(--text-primary);
   font-family: var(--font-display);
+}
+
+/* ── Mobile ── */
+@media (max-width: 700px) {
+  .container { padding: 0 16px; }
+  .navbar { padding: 0 8px; top: 8px; }
+  .navbar .container { gap: 4px; padding: 0 10px; }
+  .navbar-links { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .navbar-links::-webkit-scrollbar { display: none; }
+  .navbar-links a { padding: 6px 8px; font-size: 0.68rem; }
+  .page { padding: 24px 0 48px; }
+  .page-header { flex-direction: column; gap: 12px; align-items: stretch; }
+  .page-header h2 { font-size: 1.3rem; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card-body { padding: 16px; }
+  .stat-card .stat-value { font-size: 1.5rem; }
+  .table-inner { padding: 12px 14px; }
+  .table-wrapper { margin: 0 -14px; padding: 0 14px; }
+  th, td { padding: 8px 8px 8px 0; font-size: 0.8rem; }
+  .modal { padding: 24px; max-width: 100%; }
+  .order-detail-row { flex-direction: column; gap: 2px; }
+  .item-row { grid-template-columns: 1fr 56px 24px; }
 }
