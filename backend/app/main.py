@@ -1,14 +1,20 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from .database import engine, get_db, Base
+from .database import init_db, get_db
 from .routers import products, customers, orders
 from . import crud
 
-Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Inventory Management System")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(title="Inventory Management System", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
